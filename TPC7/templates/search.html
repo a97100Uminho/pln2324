@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="text-center">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <form class="d-flex w-75" method="post" action="{{ url_for('search') }}">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="query">
+        <button class="btn btn-primary" type="submit">Search</button> <!-- Botão com estilo primário -->
+      </form>
+    </div>
+  </nav>
+</div>
+
+
+
+{% if results %}
+<div class="container">
+  <h2>Resultados da Pesquisa</h2>
+  <ul>
+    {% for result in results %}
+    <li>
+      <strong>{{ result.designacao }}</strong> (PT): {{ result.desc }}<br>
+      <strong>{{ result.designacao }}</strong> (EN): {{ result.en }}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+{% if error_message %}
+<div class="alert alert-danger" role="alert">
+  {{ error_message }}
+</div>
+{% endif %}
+{% endblock %}
